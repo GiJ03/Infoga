@@ -135,43 +135,34 @@ class infoga(object):
 		if len(sys.argv) <= 2:
 			banner().__usage__(True)
 		try:
-                        import argparse
-                        parser = argparse.ArgumentParser()
-                        parser.add_argument("-v","--verbose",help="verbose")
-                        parser.add_argument("-s","--source",help="source")
-                        
-                        ## Only one of 'domain' or 'info' should be used at a time. ##
-                        g = parser.add_mutually_exclusive_group()
-                        g.add_argument("-d","--domain",help="domain")
-                        g.add_argument("-i","--info",help="email")
-                        args= parser.parse_args()
+			opts,args = getopt.getopt(sys.argv[1:],'d:s:i:v:h',
+				['domain=','source=','info=','verbose=','help'])
 		except Exception,Error:
 			banner().__usage__(True)
 		banner().__ban__()
-
-		#Arguments:
-                self.verbose = checkVerbose(args.verbose)
-                if args.source != None:
-                        self.source = checkSource(args.source)
-                else:
-                        self.source = checkSource('all)
-                if args.domain != None:
-                        self.domain = checkTarget(args.domain)
-                        # search
-                        if self.source == "ask":self.ask(self.domain)
-                        elif self.source == "all":self.all(self.domain)
-                        elif self.source == "google":self.google(self.domain)
-                        elif self.source == "baidu":self.baidu(self.domain)
-                        elif self.source == "bing":self.bing(self.domain)
-                        elif self.source == "dogpile":self.dogpile(self.domain)
-                        elif self.source == "exalead":self.exalead(self.domain)
-                        elif self.source == "jigsaw":self.jigsaw(self.domain)
-                        elif self.source == "pgp":self.pgp(self.domain)
-                        elif self.source == "yahoo":self.yahoo(self.domain)
-                if args.info != None:
-                        self.listEmail.append(checkEmail(args.info))
-                        test('Checking info for "%s"'%(args.info)) 
-		
+		for o,a in opts:
+			if o in ('-d','--domain'):
+				self.domain = checkTarget(a)
+			if o in ('-v','--verbose'):
+				self.verbose = checkVerbose(a)
+			if o in ('-s','--source'):
+				self.source = checkSource(a)
+			if o in ('-i','--info'):
+				self.listEmail.append(checkEmail(a))
+				test('Checking info for "%s"'%(a)) 
+			if o in ('-h','--help'):
+				banner().__usage__(True)
+		# search
+		if self.source == "ask":self.ask(self.domain)
+		elif self.source == "all":self.all(self.domain)
+		elif self.source == "google":self.google(self.domain)
+		elif self.source == "baidu":self.baidu(self.domain)
+		elif self.source == "bing":self.bing(self.domain)
+		elif self.source == "dogpile":self.dogpile(self.domain)
+		elif self.source == "exalead":self.exalead(self.domain)
+		elif self.source == "jigsaw":self.jigsaw(self.domain)
+		elif self.source == "pgp":self.pgp(self.domain)
+		elif self.source == "yahoo":self.yahoo(self.domain)
 		if self.listEmail == []:
 			exit(warn('Not found emails :('))
 		for email in self.listEmail:
