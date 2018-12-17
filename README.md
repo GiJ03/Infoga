@@ -15,3 +15,8 @@ $ python infoga.py
 
 ## Usage
 
+```
+$ python infoga.py --domain nsa.gov --source all --breach -v 2
+```
+
+![run_!](https://raw.githubusercontent.com/m4ll0k/Infoga/master/screen/run_2.png)
