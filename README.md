@@ -16,7 +16,14 @@ $ python infoga.py
 ## Usage
 
 ```
-$ python infoga.py --domain nsa.gov --source all --breach -v 2
+$ python infoga.py --domain nsa.gov --source all --breach -v 2 --report ../nsa_gov.txt
 ```
 
-![run_!](https://raw.githubusercontent.com/m4ll0k/Infoga/master/screen/run_2.png)
+![run_1](https://raw.githubusercontent.com/m4ll0k/Infoga/master/screen/run_2.png)
+
+
+```
+$ python infoga.py --info m4ll0k@protonmail.com --breach -v 3 --report ../m4ll0k.txt
+```
+
+![info](https://raw.githubusercontent.com/m4ll0k/Infoga/master/screen/image_5.png)
