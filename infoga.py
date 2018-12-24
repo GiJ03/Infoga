@@ -74,7 +74,7 @@ class infoga(object):
 			if o in ('-i','--info'):
 				self.listEmail.append(checkEmail(a))
 				plus('Searching for: %s'%a)
-			if o in ('-h','--help'):usage(True)
+			if o in ('-h','--help'):Banner().usage(True)
 		### start ####
 		if self.domain != ('' or None):
 			if self.source == 'ask':self.engine(self.domain,'ask')
